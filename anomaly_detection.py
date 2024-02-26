@@ -14,7 +14,7 @@ plots the anomalies found (plot_rtwp)
 plots the frequency of anomalies per day (output)
 calculates trend for each KPI based on input window (trend) - not used 
 
-SET PATH for file !!!
+set path for input file !!!
 """
 import numpy as np
 import pandas as pd
@@ -64,7 +64,7 @@ cells=df['ECELL_ID'].unique()
 kpis=df.columns[2:].values 
 
 #%% fill anomalies matrix 
-err_a,err_b,err_c,err_c,err_d = None,None,None,None,None
+err_a,err_b,err_c,err_d = None,None,None,None
 err_a,report_a,anomalies_matrix=anomalies_adtk_ls(df,cells,kpis,anomalies_matrix,c=c,window=window,side=side,graph=graph,debug=False)
 report_1=report_a
 err_b,report_b,anomalies_matrix=gradino_scipy(df,cells,kpis,anomalies_matrix,prominence=prominence,width=width,debug=False)
@@ -90,7 +90,7 @@ report_1.drop(['BKPT_x','BKPT_y'],axis=1,inplace=True)
 report_1['BKPT']=report_1['BKPT'].apply(lambda x : np.unique(x))
 
 # functions log a csv with problematic Cell_ID, to be improved
-if (err_a or err_b or err_c or err_d) : print('trovato almeno una cella problematica') 
+if (err_a or err_b or err_c or err_d) : print('trovata almeno una cella problematica') 
 anomalies_matrix['Anomalies_count']=anomalies_matrix.count(axis=1)  
 anomalies_matrix.to_csv('anomalies_matrix.csv')
 
